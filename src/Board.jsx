@@ -3,8 +3,8 @@ import "./Board.css";
 import {Set_right,Set_wrong,gameover} from './redux/actions';
 import {useDispatch,useSelector} from 'react-redux';
 function Board(props) {
-    const score=useSelector(state=>state.reducer)
-    const gameover=useSelector(state=>state.reducer)
+    const score=useSelector(state=>state.reducer.cond)
+   
 
     const dispatch=useDispatch();
     
@@ -15,19 +15,19 @@ function Board(props) {
         const card_id=e.dataTransfer.getData(props.id);
 
         const card = document.getElementById(card_id);
-        console.log(card.id);
+       
         if(card==null){
             dispatch(Set_wrong(score-1));
             alert("wrong choice");
         }
         else{
-            if(card.id==='card_12'){
+            if(card.id==='card-12'){
                 dispatch(Set_right(score+1))
             
             card.style.display='block';
 
             e.target.appendChild(card)
-            console.log("board",e);
+            console.log("reached board 12",card.id);
             dispatch(gameover());
                
             }

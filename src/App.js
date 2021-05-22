@@ -1,12 +1,20 @@
 
 import './App.css';
-import React, { useState,Component } from 'react';
+import React, { useState,Component,useEffect } from 'react';
 import Board from './Board';
 import Card from './Card';
 import {useSelector} from 'react-redux';
 
 function App() {
-      const score=useSelector(state=>state.reducer);    
+      const score=useSelector(state=>state.reducer.cond);    
+      const gameover=useSelector(state=>state.reducer.over);
+
+useEffect(()=>{
+  if(gameover){
+    alert("Thanks gor playing :)");
+  }
+},[])
+
   return (
     <div className="App">
       <div className="flexbox"> 
@@ -14,7 +22,7 @@ function App() {
       <Board id="board-1" className="board">
    
     </Board>
-    <h3>Score:{score} </h3>
+    {gameover?<h1>Score:{score}/12 </h1>:""}
 
     <Board id="board-2" className="board">
    
