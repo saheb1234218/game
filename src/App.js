@@ -8,6 +8,7 @@ import {useSelector} from 'react-redux';
 function App() {
       const score=useSelector(state=>state.reducer.cond);    
       const gameover=useSelector(state=>state.reducer.over);
+      const [sviewscore,setsviewscore]=useState(false);
 
 useEffect(()=>{
   if(gameover){
@@ -15,18 +16,34 @@ useEffect(()=>{
   }
 },[])
 
+
+const viewscore=()=>{
+if(gameover){
+  alert("Thanks for playing :)");
+  setsviewscore(true)
+
+}
+}
   return (
     <div className="App">
       <div className="flexbox"> 
       <div className="boards">
-      <Board id="board-1" className="board">
+        <div >
+        <h3 style={{marginLeft:'180px'}}>Domestic Animals</h3>
+        <Board id="board-1" className="board">
    
-    </Board>
-    {gameover?<h1>Score:{score}/12 </h1>:""}
-
-    <Board id="board-2" className="board">
+   </Board>
+        </div>
+     
+    {sviewscore?<h1>Score:{score}/12</h1>:
+    <button onClick={viewscore} style={{backgroundColor:'blue',color:'white',width:'150px',height:'40px',borderRadius:'10px',fontSize:'15px',cursor:'pointer'}}>View Score</button>
+    }
+    <div >
+          <h3 style={{marginLeft:'200px'}}>Wild Animals</h3>
+        <Board id="board-2" className="board">
    
-    </Board>
+   </Board>
+        </div>
       </div>
     <div className="cards">
     <Card id="card-1" className="card_1" draggable="true" bid="board-2">

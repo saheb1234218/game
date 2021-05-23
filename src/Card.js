@@ -3,13 +3,13 @@ import './Card.css';
 function Card(props) {
 
     const dragstart=e=>{
-        console.log("card",e);
+        
         const target=e.target;
+        console.log(target);
 
-
-        e.dataTransfer.setData(props.bid,target.id);
+        e.dataTransfer.setData(props.bid || target.id,target.id);
     
-    
+        console.log("card",e);
     
         setTimeout(() => {
         target.style.display="none"
