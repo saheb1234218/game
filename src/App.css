@@ -17,6 +17,22 @@ body{
   padding: 15px;
   flex-direction: column;
 }
+.heading{
+ margin-left:200px;
+}
+.pc{
+background-color: blue;
+  color:white;
+  width:150px;
+  height:40px;
+  border-radius:10px;
+  font-size:15px;
+  cursor:pointer;
+    }
+.mobiles{
+  
+  display:none
+}
 .boards{
   display: flex;
   flex-direction: row;
@@ -26,5 +42,56 @@ body{
 .cards{
   display: flex;
   flex-direction: row;
+}
+@media only screen and (max-width: 768px) {
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .pc{
+    display:none;
+  }
+  .mobiles{
+    
+  color:rgb(22, 21, 21);
+  width:100px;
+  height:30px;
+  
+  background: rgb(90, 20, 220);
+  border-radius:10px;
+  font-size:15px;
+  cursor:pointer;
+    display: contents;
+  }
+  body{
+    background-color: rgb(238, 225, 212);
+  }
+  .heading{
+    margin:0;
+    font-size: 12px;
+  }
+  .flexbox{
+    margin:0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80vh;
+
+  }
+  .boards{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 30vh;
+  }
+  .cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 }
 

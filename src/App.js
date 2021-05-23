@@ -29,22 +29,25 @@ if(gameover){
       <div className="flexbox"> 
       <div className="boards">
         <div >
-        <h3 style={{marginLeft:'180px'}}>Domestic Animals</h3>
+        <h3 className="heading" >Domestic Animals</h3>
         <Board id="board-1" className="board">
    
    </Board>
         </div>
      
     {sviewscore?<h1>Score:{score}/12</h1>:
-    <button onClick={viewscore} style={{backgroundColor:'blue',color:'white',width:'150px',height:'40px',borderRadius:'10px',fontSize:'15px',cursor:'pointer'}}>View Score</button>
-    }
+    <button className="pc" onClick={viewscore}>View Score</button> }
     <div >
-          <h3 style={{marginLeft:'200px'}}>Wild Animals</h3>
+          <h3 className="heading" >Wild Animals</h3>
         <Board id="board-2" className="board">
    
    </Board>
+   
         </div>
       </div>
+      {sviewscore?<h1>Score:{score}/12</h1>:
+    <button className="mobiles" onClick={viewscore} >View Score</button>
+    }
     <div className="cards">
     <Card id="card-1" className="card_1" draggable="true" bid="board-2">
   
