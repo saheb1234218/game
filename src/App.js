@@ -7,15 +7,56 @@ import {useSelector} from 'react-redux';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 
 
-const data1=[{
-  text:'how r u'
-},
-{
-  text:'how am i'
-},
-{
-  text:'how is everyone'
-}]
+const data1=[
+  {
+    image:"https://pschool.in/image2/animals/lion.jpg"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/horse.png"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/goat.png"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/cat.jpg"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/dog.jpg"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/sheep.jpg"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/zebra.jpg"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/pig.png"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/rhino.jpg"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/tiger.jpg"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/monkey.jpg"
+  }
+  ,
+  {
+    image:"https://pschool.in/image2/animals/elephant.jpg"
+  }
+  
+]
 
 const data2=[];
 
@@ -24,16 +65,13 @@ function App() {
 //       const gameover=useSelector(state=>state.reducer.over);
 //       const [sviewscore,setsviewscore]=useState(false);
 
-// useEffect(()=>{
-//   if(gameover){
-//     alert("Thanks gor playing :)");
-//   }
-// },[])
 
 const onDragend=result=>{
+
 console.log(result);
 const item=data1[result.source.index]
-data2.splice(result.destination.index,0,item);
+data2.splice(0,0,item);
+
 data1.splice(result.source.index,1);
 
 }
@@ -48,16 +86,66 @@ data1.splice(result.source.index,1);
   return (
     <DragDropContext
       onDragEnd={onDragend}
-      style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}
+      
     >
-       <Droppable
+      <div className="container">
+      <div className="container-top">
+
+      <Droppable
        droppableId="1"
        >
          {(provided) => (
                    <div
                    {...provided.droppableProps}
                    ref={provided.innerRef}
-                  style={{width:'400px',height:'300px',backgroundColor:'green'}}
+                 className="box2"
+                 >
+                   {data2.map((value,indexes)=>(
+                       
+                       
+                      
+                       <img  className="card" src={value.image}></img>
+       
+                      ))}
+                      
+         
+         {provided.placeholder}
+         </div>
+         )}
+       </Droppable>
+       <Droppable
+       droppableId="2"
+       >
+         {(provided) => (
+                   <div
+                   {...provided.droppableProps}
+                   ref={provided.innerRef}
+                 className="box2"
+                 >
+                   {data2.map((value,indexes)=>(
+                       
+                       
+                      
+                        <h1>{value.text}</h1> 
+       
+                      ))}
+                      
+         
+         {provided.placeholder}
+         </div>
+         )}
+       </Droppable>
+       </div>
+       <Droppable
+       droppableId="3"
+      
+       
+       >
+         {(provided) => (
+                   <div
+                   {...provided.droppableProps}
+                   ref={provided.innerRef}
+                  className="box1"
                  >
          
                       {data1.map((val,ind)=>(
@@ -73,10 +161,10 @@ data1.splice(result.source.index,1);
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
-                                    
+                                   
                                   >
                         
-                        <h1>{val.text}</h1> 
+                        <img  className="card" src={val.image}></img>
                         </div>
          )}
          </Draggable>
@@ -87,42 +175,8 @@ data1.splice(result.source.index,1);
          </div>
          )}
        </Droppable>
-       <Droppable
-       droppableId="3"
-       >
-         {(provided) => (
-                   <div
-                   {...provided.droppableProps}
-                   ref={provided.innerRef}
-                  style={{width:'400px',height:'300px',backgroundColor:'yellow'}}
-                 >
-                   {data2.map((val,ind)=>(
-                       
-                       
-                       <Draggable
-                       draggableId={`${ind}`}
-                       index={ind}
-                       
-                       >
-                       {(provided) => (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    
-                                  >
-                        
-                        <h1>{val.text}</h1> 
-                        </div>
-         )}
-         </Draggable>
-                      ))}
-                      
-         
-         {provided.placeholder}
-         </div>
-         )}
-       </Droppable>
+       </div>
+       
         </DragDropContext>
   );
 }
