@@ -2,9 +2,9 @@
 import './App.css';
 import React, { useState,Component,useEffect } from 'react';
 
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
-
+import {Set_right,Set_wrong,gameover} from './redux/actions';
 
 const data1=[
   {
@@ -77,18 +77,20 @@ const data2=[];
 function App() {
   const [animal,setanimal]=useState("");
   const [count,setcount]=useState(0);
-//       const score=useSelector(state=>state.reducer.cond);    
-//       const gameover=useSelector(state=>state.reducer.over);
-//       const [sviewscore,setsviewscore]=useState(false);
+  const dispatch=useDispatch();
+      const score=useSelector(state=>state.reducer.cond);    
+      const gameover=useSelector(state=>state.reducer.over);
+      const [sviewscore,setsviewscore]=useState(false);
 
 
 const onDragend=result=>{
   setcount(count+1);
 console.log(animal)
 console.log(result);
-
+setcount(count+1);
 if(data1[result.source.index].nature==='wild'){
   if(result.destination.droppableId==='1'){
+    dispatch(Set_right(score+1));
     const item=data1[result.source.index]
     data2.splice(0,0,item);
     
@@ -96,6 +98,7 @@ if(data1[result.source.index].nature==='wild'){
   
   }
   else{
+   
     data1.splice(result.source.index,1);
     alert("Wrong Choice");
    
@@ -107,6 +110,7 @@ if(data1[result.source.index].nature==='wild'){
 }
 else{
   if(result.destination.droppableId==='2'){
+    dispatch(Set_right(score+1));
     const item=data1[result.source.index]
     data3.splice(0,0,item);
     
@@ -114,13 +118,17 @@ else{
   
   }
   else{
+   
     data1.splice(result.source.index,1);
     alert("Wrong Choice");
    
    
   }
 }
-
+console.log(count)
+if(count===11){
+  alert("gameover");
+}
 
 }
 
