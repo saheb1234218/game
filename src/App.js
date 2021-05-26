@@ -6,6 +6,19 @@ import Card from './Card';
 import {useSelector} from 'react-redux';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 
+
+const data1=[{
+  text:'how r u'
+},
+{
+  text:'how am i'
+},
+{
+  text:'how is everyone'
+}]
+
+const data2=[];
+
 function App() {
 //       const score=useSelector(state=>state.reducer.cond);    
 //       const gameover=useSelector(state=>state.reducer.over);
@@ -18,6 +31,10 @@ function App() {
 // },[])
 
 const onDragend=result=>{
+console.log(result);
+const item=data1[result.source.index]
+data2.splice(result.destination.index,0,item);
+data1.splice(result.source.index,1);
 
 }
 
@@ -31,7 +48,7 @@ const onDragend=result=>{
   return (
     <DragDropContext
       onDragEnd={onDragend}
-    
+      style={{display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}
     >
        <Droppable
        droppableId="1"
@@ -40,26 +57,68 @@ const onDragend=result=>{
                    <div
                    {...provided.droppableProps}
                    ref={provided.innerRef}
-                  style={{width:'600px',height:'500px',backgroundColor:'green'}}
+                  style={{width:'400px',height:'300px',backgroundColor:'green'}}
                  >
-         <Draggable
-         draggableId="2"
-         index="3"
          
-         >
-         {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      
-                    >
-                      <div style={{width:'200px',height:'40px',backgroundColor:'blue'}}>
-                        hie
-                      </div>
-                      </div>
+                      {data1.map((val,ind)=>(
+                       
+                       
+                       <Draggable
+                       draggableId={`${ind}`}
+                       index={ind}
+                       
+                       >
+                       {(provided) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    
+                                  >
+                        
+                        <h1>{val.text}</h1> 
+                        </div>
          )}
          </Draggable>
+                      ))}
+                      
+                      
+         {provided.placeholder}
+         </div>
+         )}
+       </Droppable>
+       <Droppable
+       droppableId="3"
+       >
+         {(provided) => (
+                   <div
+                   {...provided.droppableProps}
+                   ref={provided.innerRef}
+                  style={{width:'400px',height:'300px',backgroundColor:'yellow'}}
+                 >
+                   {data2.map((val,ind)=>(
+                       
+                       
+                       <Draggable
+                       draggableId={`${ind}`}
+                       index={ind}
+                       
+                       >
+                       {(provided) => (
+                                  <div
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    
+                                  >
+                        
+                        <h1>{val.text}</h1> 
+                        </div>
+         )}
+         </Draggable>
+                      ))}
+                      
+         
          {provided.placeholder}
          </div>
          )}
