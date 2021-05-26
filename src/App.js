@@ -9,72 +9,122 @@ import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 
 const data1=[
   {
-    image:"https://pschool.in/image2/animals/lion.jpg"
+    image:"https://pschool.in/image2/animals/lion.jpg",
+    nature:"wild",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/horse.png"
+    image:"https://pschool.in/image2/animals/horse.png",
+    nature:"domestic",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/goat.png"
+    image:"https://pschool.in/image2/animals/goat.png",
+    nature:"domestic",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/cat.jpg"
+    image:"https://pschool.in/image2/animals/cat.jpg",
+    nature:"domestic",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/dog.jpg"
+    image:"https://pschool.in/image2/animals/dog.jpg",
+    nature:"domestic",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/sheep.jpg"
+    image:"https://pschool.in/image2/animals/sheep.jpg",
+    nature:"domestic"
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/zebra.jpg"
+    image:"https://pschool.in/image2/animals/zebra.jpg",
+    nature:"wild",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/pig.png"
+    image:"https://pschool.in/image2/animals/pig.png",
+    nature:"domestic",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/rhino.jpg"
+    image:"https://pschool.in/image2/animals/rhino.jpg",
+    nature:"wild",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/tiger.jpg"
+    image:"https://pschool.in/image2/animals/tiger.jpg",
+    nature:"wild",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/monkey.jpg"
+    image:"https://pschool.in/image2/animals/monkey.jpg",
+    nature:"wild",
   }
   ,
   {
-    image:"https://pschool.in/image2/animals/elephant.jpg"
+    image:"https://pschool.in/image2/animals/elephant.jpg",
+    nature:"wild",
   }
   
 ]
 
+
+
+const data3=[];
 const data2=[];
 
 function App() {
+  const [animal,setanimal]=useState("");
+  const [count,setcount]=useState(0);
 //       const score=useSelector(state=>state.reducer.cond);    
 //       const gameover=useSelector(state=>state.reducer.over);
 //       const [sviewscore,setsviewscore]=useState(false);
 
 
 const onDragend=result=>{
-
+  setcount(count+1);
+console.log(animal)
 console.log(result);
-const item=data1[result.source.index]
-data2.splice(0,0,item);
 
-data1.splice(result.source.index,1);
+if(data1[result.source.index].nature==='wild'){
+  if(result.destination.droppableId==='1'){
+    const item=data1[result.source.index]
+    data2.splice(0,0,item);
+    
+    data1.splice(result.source.index,1);
+  
+  }
+  else{
+    data1.splice(result.source.index,1);
+    alert("Wrong Choice");
+   
+    
+  }
+
+
+  
+}
+else{
+  if(result.destination.droppableId==='2'){
+    const item=data1[result.source.index]
+    data3.splice(0,0,item);
+    
+    data1.splice(result.source.index,1);
+  
+  }
+  else{
+    data1.splice(result.source.index,1);
+    alert("Wrong Choice");
+   
+   
+  }
+}
+
 
 }
+
 
 // const viewscore=()=>{
 // if(gameover){
@@ -122,11 +172,11 @@ data1.splice(result.source.index,1);
                    ref={provided.innerRef}
                  className="box2"
                  >
-                   {data2.map((value,indexes)=>(
+                   {data3.map((value,indexes)=>(
                        
                        
                       
-                        <h1>{value.text}</h1> 
+                        <img  className="card" src={value.image}></img>
        
                       ))}
                       
@@ -163,7 +213,7 @@ data1.splice(result.source.index,1);
                                     {...provided.dragHandleProps}
                                    
                                   >
-                        
+                                            
                         <img  className="card" src={val.image}></img>
                         </div>
          )}
