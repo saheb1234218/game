@@ -1,8 +1,7 @@
 
 import './App.css';
 import React, { useState,Component,useEffect } from 'react';
-import Board from './Board';
-import Card from './Card';
+
 import {useSelector} from 'react-redux';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
 
