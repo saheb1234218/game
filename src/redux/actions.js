@@ -12,9 +12,10 @@ export const Set_wrong=(condition)=>{
     }
 
 }
-export const gameover=()=>{
+export const gameover=(over)=>{
     return {
-        type:'SET_OVER'
+        type:'SET_OVER',
+        payload: over
     }
 }
 

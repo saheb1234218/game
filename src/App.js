@@ -4,7 +4,7 @@ import React, { useState,Component,useEffect } from 'react';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {DragDropContext,Droppable,Draggable} from 'react-beautiful-dnd';
-import {Set_right,Set_wrong,gameover} from './redux/actions';
+import {Set_right,gameover} from './redux/actions';
 
 const data1=[
   {
@@ -79,7 +79,7 @@ function App() {
   const [count,setcount]=useState(0);
   const dispatch=useDispatch();
       const score=useSelector(state=>state.reducer.cond);    
-      const gameover=useSelector(state=>state.reducer.over);
+      const gameovered=useSelector(state=>state.reducer.over);
       const [sviewscore,setsviewscore]=useState(false);
 
 
@@ -127,11 +127,18 @@ else{
 }
 console.log(count)
 if(count===11){
+  dispatch(gameover(true));
   alert("gameover");
 }
 
 }
 
+const setplay=()=>{
+  data1=data2+data3;
+  console.log(data1);
+  dispatch(Set_right(0));
+  dispatch(gameover(false));
+}
 
 // const viewscore=()=>{
 // if(gameover){
@@ -170,6 +177,7 @@ if(count===11){
          </div>
          )}
        </Droppable>
+    {gameovered?<div className="score">Score:{score}/12</div>:""} 
        <Droppable
        droppableId="2"
        >
@@ -193,45 +201,47 @@ if(count===11){
          )}
        </Droppable>
        </div>
-       <Droppable
-       droppableId="3"
+       <div style={{marginLeft:'100px',marginTop:'50px'}}>{gameovered?<div className="score-mob">Score:{score}/12</div>:""}</div> 
+      {gameovered?"":
+      <Droppable
+      droppableId="3"
+     
       
-       
-       >
-         {(provided) => (
-                   <div
-                   {...provided.droppableProps}
-                   ref={provided.innerRef}
-                  className="box1"
-                 >
-         
-                      {data1.map((val,ind)=>(
-                       
-                       
-                       <Draggable
-                       draggableId={`${ind}`}
-                       index={ind}
-                       
-                       >
-                       {(provided) => (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                   
-                                  >
-                                            
-                        <img  className="card" src={val.image}></img>
-                        </div>
-         )}
-         </Draggable>
-                      ))}
+      >
+        {(provided) => (
+                  <div
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                 className="box1"
+                >
+        
+                     {data1.map((val,ind)=>(
                       
                       
-         {provided.placeholder}
-         </div>
-         )}
-       </Droppable>
+                      <Draggable
+                      draggableId={`${ind}`}
+                      index={ind}
+                      
+                      >
+                      {(provided) => (
+                                 <div
+                                   ref={provided.innerRef}
+                                   {...provided.draggableProps}
+                                   {...provided.dragHandleProps}
+                                  
+                                 >
+                                           
+                       <img  className="card" src={val.image}></img>
+                       </div>
+        )}
+        </Draggable>
+                     ))}
+                     
+                     
+        {provided.placeholder}
+        </div>
+        )}
+      </Droppable>} 
        </div>
        
         </DragDropContext>

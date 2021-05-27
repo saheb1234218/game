@@ -19,7 +19,7 @@ const reducer= (state= initialstate ,action) =>{
         case 'SET_OVER':
             return {
                 ...state,
-               over: true,
+               over: action.payload,
             };
             
         default:
