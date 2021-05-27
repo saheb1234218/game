@@ -154,7 +154,8 @@ const setplay=()=>{
     >
       <div className="container">
       <div className="container-top">
-
+        <div className="box-con">
+      <span className="heading" >Wild Animals</span>
       <Droppable
        droppableId="1"
        >
@@ -177,7 +178,10 @@ const setplay=()=>{
          </div>
          )}
        </Droppable>
+       </div>
     {gameovered?<div className="score">Score:{score}/12</div>:""} 
+    <div className="box-con" >
+    <span className="heading">Domestic Animals</span>
        <Droppable
        droppableId="2"
        >
@@ -200,6 +204,7 @@ const setplay=()=>{
          </div>
          )}
        </Droppable>
+       </div>
        </div>
        <div style={{marginLeft:'100px',marginTop:'50px'}}>{gameovered?<div className="score-mob">Score:{score}/12</div>:""}</div> 
       {gameovered?"":
